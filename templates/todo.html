@@ -1,0 +1,44 @@
+<head>
+<style>
+input[type=text] {
+  font-size:24px;
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+input[type=submit] {
+  font-size:14px;
+  background-color: #D3D3D3;
+  border: none;
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 6px 2px;
+  cursor: pointer;
+}
+h1{
+  font-size: 40px;
+}
+li {
+  font-size: 30px;
+}
+
+</style>
+</head>
+<h1>Todo App</h1>
+
+<ul>
+  {% for todo_item in all_items %}
+    <li>{{ todo_item.content }}
+      <form action = '/deleteTodo/{{todo_item.id}}/' style = "display:inline;" method = "post">{% csrf_token %}
+        <input type = 'submit' value = 'Delete'/>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+
+<form action = '/addTodo/' method = "post">{% csrf_token %}
+  <input type = 'text' name =  'content' size="50"/>
+  <input type = 'submit' value = 'Add'/>
+</form>
